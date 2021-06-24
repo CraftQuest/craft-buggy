@@ -1,0 +1,49 @@
+{
+    "name": "craftquest/buggy",
+    "description": "A plugin that helps you learn how to use Xdebug via CraftQuest.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "buggy"
+    ],
+    "support": {
+        "docs": "https://github.com/ryanirelan/buggy/blob/master/README.md",
+        "issues": "https://github.com/ryanirelan/buggy/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ryan Irelan",
+            "homepage": "https://craftquest.io"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "require-dev": {
+      "craftcms/cms": "^3.2.0",
+      "codeception/codeception": "^3.0",
+      "vlucas/phpdotenv": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "craftquest\\buggy\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Buggy",
+        "handle": "buggy",
+        "developer": "Ryan Irelan",
+        "developerUrl": "https://craftquest.io",
+        "documentationUrl": "https://github.com/ryanirelan/buggy/blob/master/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/ryanirelan/buggy/master/CHANGELOG.md",
+        "components": {
+            "buggyService": "craftquest\\buggy\\services\\BuggyService"
+        },
+        "class": "craftquest\\buggy\\Buggy"
+    }
+}
