@@ -14,6 +14,7 @@ use craftquest\buggy\Buggy;
 
 use Craft;
 use craft\base\Component;
+use craftquest\buggy\models\SwarmModel;
 
 /**
  * BuggyService Service
@@ -51,5 +52,10 @@ class BuggyService extends Component
         }
 
         return $result;
+    }
+
+    public function infest($count): SwarmModel
+    {
+        return BugModel;
     }
 }

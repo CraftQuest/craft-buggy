@@ -45,16 +45,13 @@ class BuggyTwigExtension extends AbstractExtension
     }
 
     /**
-     * Returns an array of Twig filters, used in Twig templates via:
-     *
-     *      {{ 'something' | someFilter }}
      *
      * @return array
      */
     public function getFilters()
     {
         return [
-            new TwigFilter('someFilter', [$this, 'someInternalFunction']),
+            new TwigFilter('screen', [$this, 'screen']),
         ];
     }
 
@@ -68,7 +65,9 @@ class BuggyTwigExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('someFunction', [$this, 'someInternalFunction']),
+            new TwigFunction('createBugs', [$this, 'createBugs']),
+            new TwigFunction('swat', [$this, 'swatBugs']),
+            new TwigFunction('spray', [$this, 'sprayBugs']),
         ];
     }
 
@@ -79,10 +78,23 @@ class BuggyTwigExtension extends AbstractExtension
      *
      * @return string
      */
-    public function someInternalFunction($text = null)
+    public function createBugs($count=10): array
     {
-        $result = $text . " in the way";
+        return;
+    }
 
-        return $result;
+    public function swatBugs($bugs)
+    {
+        return;
+    }
+
+    public function sprayBugs($bugs)
+    {
+        return;
+    }
+
+    public function screen($bugs)
+    {
+        return;
     }
 }
