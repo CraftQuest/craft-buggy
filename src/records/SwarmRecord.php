@@ -34,4 +34,3 @@ class SwarmRecord extends ActiveRecord
         return '{{%buggy_swarms}}';
     }
 }
-}
