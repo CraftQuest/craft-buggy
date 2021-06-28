@@ -1,0 +1,132 @@
+{#
+
+    Example template for the Buggy plugin "Game" feature
+
+    Here you can use the Twig variables, controllers, services, models, and records
+    and debug the code using Xdebug and PhpStorm or VS Code.
+
+    1. Install the Buggy plugin
+    2. Copy the contents of this template to the index.twig template in the templates
+    directory of the Craft project.
+    3. Load the homepage of the site and create some swarms!
+
+    After that, you can fire up Xdebug and begin stepping through the code
+    and find the bug I left behind (to be honest, there's probably more than one).
+
+    Have fun!
+
+    -Ryan
+
+#}
+<html>
+<head>
+    <title>Buggy</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+          rel="stylesheet">
+</head>
+
+<body>
+{% set swarms = craft.buggy.swarms() %}
+<div class="min-h-screen bg-black">
+    <div class="py-10">
+        <header>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+                <h1 class="text-3xl font-bold leading-tight text-white">
+                    Buggy
+                </h1>
+                <p class="align-middle text-white">Part of the Debugging with Xdebug course from <a href="https://craftquest.io">CraftQuest</a>.</p>
+            </div>
+        </header>
+        <main>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="flex flex-col">
+                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Swarm Count
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Swarm Strength
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Swarm
+                                        </th>
+                                        <th scope="col"
+                                            class="relative px-6 py-3">
+                                            <span class="sr-only">Spray</span>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% if swarms | length %}
+                                        {% for swarm in swarms %}
+                                            <tr class="{{ cycle(['bg-white', 'bg-gray-50'], loop.index0) }}">
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    {{ swarm.count }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    {{ swarm.strength }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-wrap text-xl text-gray-500">
+                                                    {% if swarm.count %}
+                                                        {% for i in 1..swarm.count %}🦟{% endfor %}
+                                                    {% endif %}
+
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                    {% if swarm.count >= 1 %}
+                                                        <form action=""
+                                                              method="post">
+                                                            {{ csrfInput() }}
+                                                            {{ actionInput('buggy/default/spray-swarm') }}
+                                                            {{ hiddenInput('id', swarm.id) }}
+                                                            {{ hiddenInput('count', swarm.count) }}
+                                                            {{ hiddenInput('strength', swarm.strength) }}
+                                                            <input class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                                                   type="submit"
+                                                                   value="Spray Swarm">
+                                                        </form>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <tr class="bg-white">
+                                            <td></td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> No swarms yet! Create some using the button below.</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="" method="post">
+                    {{ csrfInput() }}
+                    {{ actionInput('buggy/default/create-swarm') }}
+                    {{ hiddenInput('count', random(1, 100)) }}
+                    {{ hiddenInput('strength', random(1, 50)) }}
+                    <p class="mt-10"><input
+                                class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                type="submit" value="Create New Swarm"></p>
+                </form>
+            </div>
+        </main>
+    </div>
+
+</div>
+
+</body>
+
+</html>
