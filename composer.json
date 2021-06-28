@@ -1,14 +1,18 @@
 {
     "name": "craftquest/buggy",
-    "description": "A plugin that helps you learn how to use Xdebug via CraftQuest.",
+    "description": "Put bugs your control panel and learn how to use Xdebug via CraftQuest.",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "craft",
         "cms",
         "craftcms",
         "craft-plugin",
-        "buggy"
+        "buggy",
+        "xdebug",
+        "bugs",
+        "debugging",
+        "control panel"
     ],
     "support": {
         "docs": "https://github.com/ryanirelan/buggy/blob/master/README.md",
