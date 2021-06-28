@@ -46,34 +46,35 @@ class DefaultController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'do-something'];
+    protected $allowAnonymous = ['create-swarm', 'spray-swarm'];
 
     // Public Methods
     // =========================================================================
 
     /**
-     * Handle a request going to our plugin's index action URL,
-     * e.g.: actions/buggy/default
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionCreateSwarm()
     {
-        $result = 'Welcome to the DefaultController actionIndex() method';
 
-        return $result;
+        $swarmCount = Craft::$app->getRequest()->getParam('count');
+        $swarmStrength = Craft::$app->getRequest()->getParam('strength');
+
+        Buggy::$plugin->buggyService->createSwarm($swarmCount, $swarmStrength);
     }
 
     /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/buggy/default/do-something
      *
      * @return mixed
      */
-    public function actionDoSomething()
+    public function actionSpraySwarm()
     {
-        $result = 'Welcome to the DefaultController actionDoSomething() method';
+        $swarmId = Craft::$app->getRequest()->getParam('id');
+        $swarmStrength = Craft::$app->getRequest()->getParam('strength');
+        $swarmCount = Craft::$app->getRequest()->getParam('count');
 
-        return $result;
+        Buggy::$plugin->buggyService->spray($swarmId, $swarmStrength, $swarmCount);
+
     }
 }
