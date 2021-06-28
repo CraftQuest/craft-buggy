@@ -100,10 +100,8 @@ class Install extends Migration
                     'dateCreated' => $this->dateTime()->notNull(),
                     'dateUpdated' => $this->dateTime()->notNull(),
                     'uid' => $this->uid(),
-                    // Custom columns in the table
-                    'coupon_code' => $this->text()->notNull(),
-                    'description' => $this->text(),
-                    'enabled' => $this->boolean()->defaultValue(false)->notNull(),
+                    'count' => $this->integer(),
+                    'strength' => $this->integer(),
                 ]
             );
         }
