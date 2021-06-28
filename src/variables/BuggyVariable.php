@@ -11,16 +11,13 @@
 namespace craftquest\buggy\variables;
 
 use craftquest\buggy\Buggy;
+use craftquest\buggy\services\BuggyService;
 
 use Craft;
+use yii\db\ActiveRecord;
 
 /**
  * Buggy Variable
- *
- * Craft allows plugins to provide their own template variables, accessible from
- * the {{ craft }} global variable (e.g. {{ craft.buggy }}).
- *
- * https://craftcms.com/docs/plugins/variables
  *
  * @author    Ryan Irelan
  * @package   Buggy
@@ -32,25 +29,45 @@ class BuggyVariable
     // =========================================================================
 
     /**
-     * Whatever you want to output to a Twig template can go into a Variable method.
-     * You can have as many variable functions as you want.  From any Twig template,
-     * call it like this:
      *
-     *     {{ craft.buggy.exampleVariable }}
-     *
-     * Or, if your variable requires parameters from Twig:
-     *
-     *     {{ craft.buggy.exampleVariable(twigValue) }}
-     *
-     * @param null $optional
-     * @return string
+     * @return array
      */
-    public function exampleVariable($optional = null)
+
+    public function swarms()
     {
-        $result = "And away we go to the Twig template...";
-        if ($optional) {
-            $result = "I'm feeling optional today...";
-        }
-        return $result;
+        return Buggy::$plugin->buggyService->getSwarms();
     }
+
+
+    /**
+     * @param $count
+     * @param $strength
+     */
+    public function createSwarm($count, $strength)
+    {
+        Buggy::$plugin->buggyService->createSwarm($count, $strength);
+    }
+
+    /**
+     * @param $swarmId
+     */
+    public function getSwarm($swarmId)
+    {
+        return Buggy::$plugin->buggyService->getSwarm($swarmId);
+    }
+
+    /**
+     * @param $swarmId
+     * @param $swarmStrength
+     * @param $count
+     * @return int
+     */
+    public function spray($swarmId, $swarmStrength, $count): int
+    {
+        return Buggy::$plugin->buggyService->spray($swarmId, $swarmStrength, $count);
+    }
+
+
+
+
 }
