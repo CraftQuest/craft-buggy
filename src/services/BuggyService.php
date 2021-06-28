@@ -15,15 +15,10 @@ use craftquest\buggy\Buggy;
 use Craft;
 use craft\base\Component;
 use craftquest\buggy\models\SwarmModel;
+use craftquest\buggy\records\SwarmRecord;
 
 /**
  * BuggyService Service
- *
- * All of your plugin’s business logic should go in services, including saving data,
- * retrieving data, etc. They provide APIs that your controllers, template variables,
- * and other plugins can interact with.
- *
- * https://craftcms.com/docs/plugins/services
  *
  * @author    Ryan Irelan
  * @package   Buggy
@@ -35,27 +30,76 @@ class BuggyService extends Component
     // =========================================================================
 
     /**
-     * This function can literally be anything you want, and you can have as many service
-     * functions as you want
-     *
-     * From any other plugin file, call it like this:
-     *
-     *     Buggy::$plugin->buggyService->exampleService()
-     *
-     * @return mixed
+     * @param $count
+     * @param $strength
      */
-    public function exampleService()
-    {
-        $result = 'something';
-        // Check our Plugin's settings for `someAttribute`
-        if (Buggy::$plugin->getSettings()->someAttribute) {
-        }
 
-        return $result;
+    public function createSwarm($count, $strength): void
+    {
+        $swarmRecord = new SwarmRecord;
+        $swarmRecord->setAttribute('count', $count);
+        $swarmRecord->setAttribute('strength', $strength);
+        $swarmRecord->save();
+
     }
 
-    public function infest($count): SwarmModel
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getSwarms()
     {
-        return BugModel;
+        return SwarmRecord::find()
+            ->orderBy('count', 'strength')->all();
+    }
+
+
+    /**
+     * @param $swarmId
+     * @return array|\yii\db\ActiveRecord|null
+     */
+    public function getSwarm($swarmId)
+    {
+        return SwarmRecord::find()
+            ->select('id', $swarmId)
+            ->one();
+    }
+
+    /**
+     * @param $swarmId
+     * @param $swarmStrength
+     * @param $swarmCount
+     * @return int
+     */
+    public function spray($swarmId, $swarmStrength, $swarmCount): int
+    {
+        // swarm strength is a integer amount you can reduce from effectiveness of spray. 
+        
+        $effectiveness = rand(1,10) / $swarmStrength;
+
+        if ($swarmCount > 0 or $swarmCount <= $effectiveness)
+        {
+            $this->updateSwarm($swarmId, $swarmCount - $effectiveness);
+            return $swarmCount - $effectiveness;
+        }
+
+    }
+
+
+
+    /**
+     * @param $swarmId
+     * @param $count
+     */
+    public function updateSwarm($swarmId, $count)
+    {
+        // get swarm
+        $swarmRecord = SwarmRecord::find()
+            ->where(['id' => $swarmId])
+            ->one();
+
+        if ($swarmRecord) {
+            $swarmRecord->setAttribute('count',$count);
+            $swarmRecord->save();
+        }
     }
 }

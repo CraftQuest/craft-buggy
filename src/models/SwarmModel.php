@@ -28,11 +28,29 @@ class SwarmModel extends Model
     // =========================================================================
 
     /**
-     * Some field model attribute
-     *
-     * @var string
+     * @var int|null ID
      */
-    public $someAttribute = 'Some Default';
+    public $id;
+
+    /**
+     * @var int Count
+     */
+    public $count = 0;
+
+    /**
+     * @var int Strength
+     */
+    public $strength = 0;
+
+    /**
+     * @var DateTime|null Date created
+     */
+    public $dateCreated;
+
+    /**
+     * @var DateTime|null Date updated
+     */
+    public $dateUpdated;
 
     // Public Methods
     // =========================================================================
