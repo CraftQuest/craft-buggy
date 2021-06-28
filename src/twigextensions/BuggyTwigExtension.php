@@ -54,46 +54,14 @@ class BuggyTwigExtension extends AbstractExtension
             new TwigFilter('screen', [$this, 'screen']),
         ];
     }
-
     /**
-     * Returns an array of Twig functions, used in Twig templates via:
-     *
-     *      {% set this = someFunction('something') %}
-     *
-    * @return array
-     */
-    public function getFunctions()
-    {
-        return [
-            new TwigFunction('createBugs', [$this, 'createBugs']),
-            new TwigFunction('swat', [$this, 'swatBugs']),
-            new TwigFunction('spray', [$this, 'sprayBugs']),
-        ];
-    }
-
-    /**
-     * Our function called via Twig; it can do anything you want
      *
      * @param null $text
      *
      * @return string
      */
-    public function createBugs($count=10): array
-    {
-        return;
-    }
 
-    public function swatBugs($bugs)
-    {
-        return;
-    }
-
-    public function sprayBugs($bugs)
-    {
-        return;
-    }
-
-    public function screen($bugs)
+    public function screen($swarm)
     {
         return;
     }
