@@ -16,6 +16,7 @@ use Craft;
 use craft\base\Component;
 use craftquest\buggy\models\SwarmModel;
 use craftquest\buggy\records\SwarmRecord;
+use yii\base\Exception;
 
 /**
  * BuggyService Service
@@ -48,8 +49,13 @@ class BuggyService extends Component
      */
     public function getSwarms()
     {
-        return SwarmRecord::find()
-            ->orderBy('count', 'strength')->all();
+        try {
+            return SwarmRecord::find()
+                ->orderBy('coun', 'strength')->all();
+
+        } catch(Exception $exception) {
+
+        }
     }
 
 

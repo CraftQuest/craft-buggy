@@ -10,10 +10,12 @@
 
 namespace craftquest\buggy;
 
+use craftquest\buggy\assetbundles\buggy\BuggyAsset;
 use craftquest\buggy\services\BuggyService as BuggyServiceService;
 use craftquest\buggy\variables\BuggyVariable;
 use craftquest\buggy\twigextensions\BuggyTwigExtension;
 use craftquest\buggy\models\Settings;
+
 
 use Craft;
 use craft\base\Plugin;
@@ -22,7 +24,8 @@ use craft\events\PluginEvent;
 use craft\web\UrlManager;
 use craft\web\twig\variables\CraftVariable;
 use craft\events\RegisterUrlRulesEvent;
-
+use craft\events\TemplateEvent;
+use craft\web\View;
 use yii\base\Event;
 
 /**
@@ -75,6 +78,20 @@ class Buggy extends Plugin
         self::$plugin = $this;
 
 //        Craft::$app->view->registerTwigExtension(new BuggyTwigExtension());
+
+        if(Craft::$app->getRequest()->isCpRequest)
+        {
+            Event::on(
+                View::class,
+                View::EVENT_BEFORE_RENDER_TEMPLATE,
+                function (TemplateEvent $event) {
+
+                    // Get view
+                    Craft::$app->getView()->registerAssetBundle(BuggyAsset::class);
+                }
+            );
+        }
+
 
         Event::on(
             UrlManager::class,

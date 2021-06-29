@@ -53,6 +53,7 @@ class BuggyAsset extends AssetBundle
         // define the relative path to CSS/JS files that should be registered with the page
         // when this asset bundle is registered
         $this->js = [
+            'js/bugs/bug-min.js',
             'js/Buggy.js',
         ];
 
