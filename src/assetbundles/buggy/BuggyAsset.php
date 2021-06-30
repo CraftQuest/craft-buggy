@@ -54,7 +54,7 @@ class BuggyAsset extends AssetBundle
         // when this asset bundle is registered
         $this->js = [
             'js/bugs/bug-min.js',
-            'js/Buggy.js',
+//            'js/Buggy.js',
         ];
 
         $this->css = [

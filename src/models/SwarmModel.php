@@ -43,6 +43,11 @@ class SwarmModel extends Model
     public $strength = 0;
 
     /**
+     * @var bool
+     */
+    public $seeded = false;
+
+    /**
      * @var DateTime|null Date created
      */
     public $dateCreated;

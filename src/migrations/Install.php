@@ -15,6 +15,7 @@ use craftquest\buggy\Buggy;
 use Craft;
 use craft\config\DbConfig;
 use craft\db\Migration;
+use craftquest\buggy\records\SwarmRecord;
 
 /**
  * Buggy Install Migration
@@ -52,9 +53,9 @@ class Install extends Migration
         if ($this->createTables()) {
 //            $this->createIndexes();
             $this->addForeignKeys();
+            $this->insertDefaultData();
             // Refresh the db schema caches
             Craft::$app->db->schema->refresh();
-            $this->insertDefaultData();
         }
 
         return true;
@@ -102,6 +103,8 @@ class Install extends Migration
                     'uid' => $this->uid(),
                     'count' => $this->integer(),
                     'strength' => $this->integer(),
+                    'seeded' => $this->boolean(),
+                    'siteId' => $this->integer()->null()
                 ]
             );
         }
@@ -143,6 +146,13 @@ class Install extends Migration
      */
     protected function insertDefaultData()
     {
+        $starterSwarm = [
+            'count' => 100,
+            'strength' => 25,
+            'seeded' => true,
+        ];
+
+            $this->insert(SwarmRecord::tableName(), $starterSwarm);
     }
 
     /**

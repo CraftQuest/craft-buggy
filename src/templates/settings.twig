@@ -17,10 +17,10 @@
 
 {% do view.registerAssetBundle("craftquest\\buggy\\assetbundles\\buggy\\BuggyAsset") %}
 
-{{ forms.textField({
-    label: 'Some Field',
-    instructions: 'Enter some setting here.',
-    id: 'someAttribute',
-    name: 'someAttribute',
-    value: settings['someAttribute']})
+{{ forms.lightSwitchField({
+    label: 'Enable Automatic Spawning of Bugs',
+    instructions: 'When enabled Buggy will automatically spawn tiny bugs to crawl around the Control Panel interface based on strategically planted software bugs in the code. This is the one you want enabled if you are using Buggy to follow along with CraftQuest\'s Xdebug course. When disabled, you can manually create bugs using the included example Twig template.' ,
+    id: 'automaticBugSpawning',
+    name: 'automaticBugSpawning',
+    on: settings['automaticBugSpawning']})
 }}

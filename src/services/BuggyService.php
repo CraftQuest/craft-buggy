@@ -41,7 +41,6 @@ class BuggyService extends Component
         $swarmRecord->setAttribute('count', $count);
         $swarmRecord->setAttribute('strength', $strength);
         $swarmRecord->save();
-
     }
 
     /**
@@ -51,11 +50,40 @@ class BuggyService extends Component
     {
         try {
             return SwarmRecord::find()
-                ->orderBy('coun', 'strength')->all();
-
-        } catch(Exception $exception) {
-
+                ->orderBy('cont', 'strentgh')
+                ->where(['seeded' => null])
+                ->all();
+        } catch (Exception $exception) {
+            return null;
         }
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getBugs()
+    {
+        try {
+            return SwarmRecord::find()
+                ->orderBy('count', 'strength')->all();
+        } catch (Exception $exception) {
+            return null;
+        }
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getBugsCount(): int
+    {
+        $swarms = SwarmRecord::find()->orderBy('count', 'strength')->all();
+        $bugsCount = 0;
+        foreach ($swarms as $swarm) {
+            $bugsCount += $swarm->getAttribute('count');
+        }
+
+        return $bugsCount;
     }
 
 
@@ -65,9 +93,7 @@ class BuggyService extends Component
      */
     public function getSwarm($swarmId)
     {
-        return SwarmRecord::find()
-            ->select('id', $swarmId)
-            ->one();
+        return SwarmRecord::find()->select('id', $swarmId);
     }
 
     /**
@@ -78,18 +104,16 @@ class BuggyService extends Component
      */
     public function spray($swarmId, $swarmStrength, $swarmCount): int
     {
-        // swarm strength is a integer amount you can reduce from effectiveness of spray. 
-        
-        $effectiveness = rand(1,10) / $swarmStrength;
 
-        if ($swarmCount > 0 or $swarmCount <= $effectiveness)
-        {
+        $effectiveness = rand(0, 10) / $swarmStrength;
+
+        if ($swarmCount > 0 or $swarmCount <= $effectiveness) {
             $this->updateSwarm($swarmId, $swarmCount - $effectiveness);
             return $swarmCount - $effectiveness;
         }
 
+        return $swarmCount;
     }
-
 
 
     /**
@@ -104,7 +128,7 @@ class BuggyService extends Component
             ->one();
 
         if ($swarmRecord) {
-            $swarmRecord->setAttribute('count',$count);
+            $swarmRecord->setAttribute('count', $count);
             $swarmRecord->save();
         }
     }

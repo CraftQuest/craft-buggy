@@ -15,5 +15,5 @@ new BugController({
 });
 
 // default spiders:
-new SpiderController({
-});
+// new SpiderController({
+// });
