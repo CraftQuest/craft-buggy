@@ -113,13 +113,16 @@ class BugService extends Component
     {
         // swarm strength is an integer amount you can reduce from effectiveness of spray.
 
-        $effectiveness = rand(1,10) / $swarmStrength;
+        $effectiveness = rand(10,100) / ($swarmStrength * 0.5);
 
         if ($swarmCount > 0 or $swarmCount <= $effectiveness)
         {
-            $this->updateSwarm($swarmId, $swarmCount - $effectiveness);
-            return $swarmCount - $effectiveness;
+            $newCount = max($swarmCount - $effectiveness, 0);
+            $this->updateSwarm($swarmId, $newCount);
+            return $newCount;
         }
+
+        return $swarmCount;
 
     }
 

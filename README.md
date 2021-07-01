@@ -31,10 +31,7 @@ Buggy has two modes:
 
 ## Configuring Buggy
 
-By default Buggy is turned off. To turn Buggy on, go to the plugin settings and enable either:
-
-- Automatic Bug Spawning
-- Manual Bug Spawning
+By default Buggy is turned on to Automatic Bug Spawning. If you turn off Automatic Bug Spawnig and haven't created any bug swarms manually, then you can get rid of the bugs. 
 
 The Automatic Bug Spawning will only work if the small code bugs shipped with Buggy remain unfixed. Manual Bug Spawning requires you to create bug using the interface.
 

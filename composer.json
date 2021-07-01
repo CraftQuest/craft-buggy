@@ -21,7 +21,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Ryan Irelan",
+            "name": "CraftQuest",
             "homepage": "https://craftquest.io"
         }
     ],
@@ -41,7 +41,7 @@
     "extra": {
         "name": "Buggy",
         "handle": "buggy",
-        "developer": "Ryan Irelan",
+        "developer": "CraftQuest",
         "developerUrl": "https://craftquest.io",
         "documentationUrl": "https://github.com/ryanirelan/buggy/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/ryanirelan/buggy/master/CHANGELOG.md",
