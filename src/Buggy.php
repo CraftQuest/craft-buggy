@@ -197,8 +197,7 @@ class Buggy extends Plugin
 
         if(property_exists($getSwarm, 'modelClass'))
         {
-            return 25;
-//            Buggy::$plugin->buggyService->createSwarm(11, 11);
+            return 40;
         }
 
         return 0;
@@ -207,16 +206,30 @@ class Buggy extends Plugin
     private function _checkGetSwarms(): int
     {
         if (!Buggy::$plugin->buggyService->getSwarms()) {
-//            Buggy::$plugin->buggyService->createSwarm(10, 10);
-            return 25;
+            return 20;
         }
 
         return 0;
     }
 
+    private function _checkSprayCount(): int
+    {
+        if (!Buggy::$plugin->buggyService->calculateSprayEffectiveness(50) > 0 )
+        {
+            return 20;
+        }
+
+        return 0;
+    }
+
+    private function _checkRemainingBugCount()
+    {
+        
+    }
+
     private function _buildBugOutbreak($bugCount): string
     {
-        $bugs = Buggy::$plugin->buggyService->getBugs();
+//        $bugs = Buggy::$plugin->buggyService->getBugs();
         return "new BugController({'minBugs':${bugCount}, 'maxBugs':${bugCount}});";
     }
 
@@ -225,6 +238,8 @@ class Buggy extends Plugin
         // Run some tests to check for bugs
         $bugCount = $this->_checkGetSwarms();
         $bugCount += $this->_checkGetSwarm();
+        $bugCount += $this->_checkSprayCount();
+        $bugCount += $this->_checkRemainingBugCount();
 
         return $bugCount;
     }
