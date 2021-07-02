@@ -71,10 +71,7 @@ class DefaultController extends Controller
     public function actionSpraySwarm()
     {
         $swarmId = Craft::$app->getRequest()->getParam('id');
-        $swarmStrength = Craft::$app->getRequest()->getParam('strength');
-        $swarmCount = Craft::$app->getRequest()->getParam('count');
-
-        Buggy::$plugin->buggyService->spray($swarmId, $swarmStrength, $swarmCount);
+        Buggy::$plugin->buggyService->spray($swarmId);
 
     }
 }

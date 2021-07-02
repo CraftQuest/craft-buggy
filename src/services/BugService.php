@@ -100,7 +100,9 @@ class BugService extends Component
     public function getSwarm($swarmId)
     {
         return SwarmRecord::find()
-            ->select('id', $swarmId);
+            ->select('*')
+            ->where(['id' => $swarmId])
+            ->one();
     }
 
     /**
