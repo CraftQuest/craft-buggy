@@ -20,7 +20,7 @@
 #}
 <html>
 <head>
-    <title>Buggy</title>
+    <title>Buggy Pest Control</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
           rel="stylesheet">
 </head>
@@ -32,9 +32,9 @@
         <header>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
                 <h1 class="text-3xl font-bold leading-tight text-white">
-                    Buggy
+                    Buggy Pest Control
                 </h1>
-                <p class="align-middle text-white">Part of the Debugging with Xdebug course from <a href="https://craftquest.io">CraftQuest</a>.</p>
+                <p class="align-middle text-white">Remote bug spraying. Part of the Debugging with Xdebug course from <a href="https://craftquest.io">CraftQuest</a>.</p>
             </div>
         </header>
         <main>
@@ -87,8 +87,6 @@
                                                             {{ csrfInput() }}
                                                             {{ actionInput('buggy/default/spray-swarm') }}
                                                             {{ hiddenInput('id', swarm.id) }}
-                                                            {{ hiddenInput('count', swarm.count) }}
-                                                            {{ hiddenInput('strength', swarm.strength) }}
                                                             <input class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                                                    type="submit"
                                                                    value="Spray Swarm">
@@ -100,7 +98,7 @@
                                     {% else %}
                                         <tr class="bg-white">
                                             <td></td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> No swarms yet! Create some using the button below.</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> No swarms yet! Create some using the button below. MAYBE THERE'S A BUG??</td>
                                             <td></td>
                                             <td></td>
                                         </tr>
@@ -115,8 +113,8 @@
                 <form action="" method="post">
                     {{ csrfInput() }}
                     {{ actionInput('buggy/default/create-swarm') }}
-                    {{ hiddenInput('count', random(1, 100)) }}
-                    {{ hiddenInput('strength', random(1, 50)) }}
+{#                    {{ hiddenInput('count', random(1, 100)) }}#}
+{#                    {{ hiddenInput('strength', random(1, 50)) }}#}
                     <p class="mt-10"><input
                                 class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                 type="submit" value="Create New Swarm"></p>
