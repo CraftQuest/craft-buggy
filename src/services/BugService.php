@@ -43,8 +43,10 @@ class BugService extends Component
      * @param $strength
      */
 
-    public function createSwarm($count, $strength): void
+    public function createSwarm(): void
     {
+        $count = rand(1,100);
+        $strength = rand(1,50);
         $swarmRecord = new SwarmRecord;
         $swarmRecord->setAttribute('count', $count);
         $swarmRecord->setAttribute('strength', $strength);
@@ -100,30 +102,28 @@ class BugService extends Component
     public function getSwarm($swarmId)
     {
         return SwarmRecord::find()
-            ->select('id', $swarmId);
+            ->select('*')
+            ->where(['id' => $swarmId])
+            ->one();
     }
 
     /**
      * @param $swarmId
-     * @param $swarmStrength
-     * @param $swarmCount
      * @return int
      */
-    public function spray($swarmId, $swarmStrength, $swarmCount): int
+    public function spray($swarmId): int
     {
-        // swarm strength is an integer amount you can reduce from effectiveness of spray.
 
-        $effectiveness = rand(10,100) / ($swarmStrength * 0.5);
+        $swarm = $this->getSwarm($swarmId);
 
-        if ($swarmCount > 0 or $swarmCount <= $effectiveness)
-        {
-            $newCount = max($swarmCount - $effectiveness, 0);
-            $this->updateSwarm($swarmId, $newCount);
-            return $newCount;
+        $effectiveness = rand(0, 10) / $swarm->strength;
+
+        if ($swarm->count > 0 or $swarm->count <= $effectiveness) {
+            $this->updateSwarm($swarmId, $swarm->count - $effectiveness);
+            return $swarm->count - $effectiveness;
         }
 
-        return $swarmCount;
-
+        return $swarm->count;
     }
 
 
