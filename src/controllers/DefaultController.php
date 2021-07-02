@@ -14,6 +14,7 @@ use craftquest\buggy\Buggy;
 
 use Craft;
 use craft\web\Controller;
+use craftquest\buggy\helpers\StatusHelper;
 
 /**
  * Default Controller
@@ -57,11 +58,7 @@ class DefaultController extends Controller
      */
     public function actionCreateSwarm()
     {
-
-        $swarmCount = Craft::$app->getRequest()->getParam('count');
-        $swarmStrength = Craft::$app->getRequest()->getParam('strength');
-
-        Buggy::$plugin->buggyService->createSwarm($swarmCount, $swarmStrength);
+        StatusHelper::getService()->createSwarm();
     }
 
     /**
@@ -71,7 +68,6 @@ class DefaultController extends Controller
     public function actionSpraySwarm()
     {
         $swarmId = Craft::$app->getRequest()->getParam('id');
-        Buggy::$plugin->buggyService->spray($swarmId);
-
+        StatusHelper::getService()->spray($swarmId);
     }
 }

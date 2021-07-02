@@ -13,6 +13,7 @@ namespace craftquest\buggy\variables;
 use craftquest\buggy\Buggy;
 use craftquest\buggy\models\Settings;
 use craftquest\buggy\services\BuggyService;
+use craftquest\buggy\helpers\StatusHelper;
 
 use Craft;
 use yii\db\ActiveRecord;
@@ -35,14 +36,6 @@ class BuggyVariable
     /**
      * @return BuggyService|\craftquest\buggy\services\BugService
      */
-    public function getService()
-    {
-
-        if (Buggy::$plugin->getSettings()->automaticBugSpawning) {
-            return Buggy::$plugin->buggyService;
-        }
-        return Buggy::$plugin->bugService;
-    }
 
     /**
      *
@@ -51,7 +44,7 @@ class BuggyVariable
 
     public function swarms()
     {
-        return $this->getService()->getSwarms();
+        return StatusHelper::getService()->getSwarms();
     }
 
 
@@ -61,7 +54,7 @@ class BuggyVariable
      */
     public function createSwarm($count, $strength)
     {
-        $this->getService()->createSwarm($count, $strength);
+        StatusHelper::getService()->createSwarm($count, $strength);
     }
 
     /**
@@ -69,7 +62,7 @@ class BuggyVariable
      */
     public function getSwarm($swarmId)
     {
-        return $this->getService()->getSwarm($swarmId);
+        return StatusHelper::getService()->getSwarm($swarmId);
     }
 
     /**
@@ -80,10 +73,7 @@ class BuggyVariable
      */
     public function spray($swarmId, $swarmStrength, $count): int
     {
-        return $this->getService()->spray($swarmId, $swarmStrength, $count);
+        return StatusHelper::getService()->spray($swarmId, $swarmStrength, $count);
     }
-
-
-
 
 }

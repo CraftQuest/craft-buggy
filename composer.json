@@ -2,7 +2,7 @@
     "name": "craftquest/buggy",
     "description": "Put bugs in your control panel and then learn how to use Xdebug via CraftQuest.",
     "type": "craft-plugin",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "keywords": [
         "craft",
         "cms",
