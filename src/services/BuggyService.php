@@ -35,8 +35,11 @@ class BuggyService extends Component
      * @param $strength
      */
 
-    public function createSwarm($count, $strength): void
+    public function createSwarm(): void
     {
+
+        $count = rand(1,100);
+        $strength = rand(1,50);
         $swarmRecord = new SwarmRecord;
         $swarmRecord->setAttribute('count', $count);
         $swarmRecord->setAttribute('strength', $strength);
@@ -98,21 +101,21 @@ class BuggyService extends Component
 
     /**
      * @param $swarmId
-     * @param $swarmStrength
-     * @param $swarmCount
      * @return int
      */
-    public function spray($swarmId, $swarmStrength, $swarmCount): int
+    public function spray($swarmId): int
     {
 
-        $effectiveness = rand(0, 10) / $swarmStrength;
+        $swarm = $this->getSwarm($swarmId);
 
-        if ($swarmCount > 0 or $swarmCount <= $effectiveness) {
-            $this->updateSwarm($swarmId, $swarmCount - $effectiveness);
-            return $swarmCount - $effectiveness;
+        $effectiveness = rand(0, 10) / $swarm->strength;
+
+        if ($swarm->count > 0 or $swarm->count <= $effectiveness) {
+            $this->updateSwarm($swarmId, $swarm->count - $effectiveness);
+            return $swarm->count - $effectiveness;
         }
 
-        return $swarmCount;
+        return $swarm->count;
     }
 
 
