@@ -45,25 +45,28 @@ class BugService extends Component
 
     public function createSwarm(): void
     {
+
         $count = rand(1,100);
         $strength = rand(1,50);
         $swarmRecord = new SwarmRecord;
         $swarmRecord->setAttribute('count', $count);
         $swarmRecord->setAttribute('strength', $strength);
         $swarmRecord->save();
-
     }
-
 
     /**
      * @return array|\yii\db\ActiveRecord[]
      */
     public function getSwarms()
     {
-        return SwarmRecord::find()
-            ->orderBy('count', 'strength')
-            ->where(['seeded' => null])
-            ->all();
+        try {
+            return SwarmRecord::find()
+                ->orderBy('count')
+                ->where(['seeded' => null])
+                ->all();
+        } catch (Exception $exception) {
+            return null;
+        }
     }
 
     /**
@@ -71,29 +74,31 @@ class BugService extends Component
      */
     public function getBugs()
     {
-        return SwarmRecord::find()
-                ->orderBy('count', 'strength')
-                ->all();
+        try {
+            return SwarmRecord::find()
+                ->orderBy('count', 'strength')->all();
+        } catch (Exception $exception) {
+            return null;
+        }
     }
+
 
     /**
      * @return int
      */
     public function getBugsCount(): int
     {
-        $bugsCount = 0;
-
         $swarms = SwarmRecord::find()
-            ->select('count')
             ->where(['seeded' => null])
             ->all();
-
+        $bugsCount = 0;
         foreach ($swarms as $swarm) {
             $bugsCount += $swarm->getAttribute('count');
         }
 
         return $bugsCount;
     }
+
 
     /**
      * @param $swarmId
@@ -116,16 +121,10 @@ class BugService extends Component
 
         $swarm = $this->getSwarm($swarmId);
 
-        $effectiveness = rand(0, 10) / $swarm->strength;
-
-        if ($swarm->count > 0 or $swarm->count <= $effectiveness) {
-            $this->updateSwarm($swarmId, $swarm->count - $effectiveness);
-            return $swarm->count - $effectiveness;
-        }
-
-        return $swarm->count;
+        $updatedCount = $this->calculateSprayEffectiveness($swarm);
+        $this->updateSwarm($swarmId, $updatedCount);
+        return $updatedCount;
     }
-
 
     /**
      * @param $swarmId
@@ -133,14 +132,21 @@ class BugService extends Component
      */
     public function updateSwarm($swarmId, $count)
     {
+        // get swarm
         $swarmRecord = SwarmRecord::find()
             ->where(['id' => $swarmId])
             ->one();
 
         if ($swarmRecord) {
-            $swarmRecord->setAttribute('count',$count);
+            $swarmRecord->setAttribute('count', $count);
             $swarmRecord->save();
         }
+    }
+
+    public function calculateSprayEffectiveness($swarm): int
+    {
+        $potency = rand(1, 10);
+        return max($swarm->count - ($swarm->strength / $potency), 0);
     }
 
 }
