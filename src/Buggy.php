@@ -84,18 +84,15 @@ class Buggy extends Plugin
 
 //        Craft::$app->view->registerTwigExtension(new BuggyTwigExtension());
 
-        if(Craft::$app->getRequest()->isCpRequest)
-        {
+        if (Craft::$app->getRequest()->isCpRequest) {
             Event::on(
                 View::class,
                 View::EVENT_BEFORE_RENDER_TEMPLATE,
                 function (TemplateEvent $event) {
                     $bugCount = 0;
 
-                    if ($this->getSettings()->automaticBugSpawning)
-                    {
+                    if ($this->getSettings()->automaticBugSpawning) {
                         $bugCount = $this->_runTests();
-
                     } else {
                         $bugCount = $this->bugService->getBugsCount();
                     }
@@ -113,7 +110,7 @@ class Buggy extends Plugin
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
+            function(RegisterUrlRulesEvent $event) {
                 $event->rules['siteActionTrigger1'] = 'buggy/default/create-swarm';
             }
         );
@@ -122,7 +119,7 @@ class Buggy extends Plugin
         Event::on(
             CraftVariable::class,
             CraftVariable::EVENT_INIT,
-            function (Event $event) {
+            function(Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
                 $variable->set('buggy', BuggyVariable::class);
@@ -133,21 +130,14 @@ class Buggy extends Plugin
         Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
+            function(PluginEvent $event) {
                 if ($event->plugin === $this) {
                     // We were just installed
                 }
             }
         );
 
-/**
- * Logging in Craft involves using one of the following methods:
- *
- * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
- * Craft::info(): record a message that conveys some useful information.
- * Craft::warning(): record a warning message that indicates something unexpected has happened.
- * Craft::error(): record a fatal error that should be investigated as soon as possible.
- */
+
         Craft::info(
             Craft::t(
                 'buggy',
@@ -189,14 +179,12 @@ class Buggy extends Plugin
     }
 
 
-
     private function _checkGetSwarm(): int
     {
         // check $buggyService->getSwarm
         $getSwarm = Buggy::$plugin->buggyService->getSwarm(1);
 
-        if(property_exists($getSwarm, 'modelClass'))
-        {
+        if (property_exists($getSwarm, 'modelClass')) {
             return 40;
         }
 
@@ -214,8 +202,8 @@ class Buggy extends Plugin
 
     private function _checkSprayCount(): int
     {
-        if (!Buggy::$plugin->buggyService->calculateSprayEffectiveness(50) > 0 )
-        {
+        $swarm = Buggy::$plugin->buggyService->getSwarm(1);
+        if (!Buggy::$plugin->buggyService->calculateSprayEffectiveness($swarm) >= 0) {
             return 20;
         }
 
@@ -224,12 +212,11 @@ class Buggy extends Plugin
 
     private function _checkRemainingBugCount()
     {
-        
+        // assert that the remaining bug count isn't a negative integer
     }
 
     private function _buildBugOutbreak($bugCount): string
     {
-//        $bugs = Buggy::$plugin->buggyService->getBugs();
         return "new BugController({'minBugs':${bugCount}, 'maxBugs':${bugCount}});";
     }
 
@@ -239,7 +226,7 @@ class Buggy extends Plugin
         $bugCount = $this->_checkGetSwarms();
         $bugCount += $this->_checkGetSwarm();
         $bugCount += $this->_checkSprayCount();
-        $bugCount += $this->_checkRemainingBugCount();
+//        $bugCount += $this->_checkRemainingBugCount();
 
         return $bugCount;
     }
