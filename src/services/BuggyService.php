@@ -99,17 +99,14 @@ class BuggyService extends Component
         return SwarmRecord::find()->select('id', $swarmId);
     }
 
-
     /**
      * @param $swarmId
      * @return int
      */
     public function spray($swarmId): int
     {
-
         $swarm = $this->getSwarm($swarmId);
-
-        $updatedCount = $this->calculateSprayEffectiveness($swarm);
+        $updatedCount = $this->calculateSprayEffectiveness($swarm->count, $swarm->strength);
         $this->updateSwarm($swarmId, $updatedCount);
         return $updatedCount;
     }
