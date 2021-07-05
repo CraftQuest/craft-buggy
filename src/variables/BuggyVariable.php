@@ -49,16 +49,16 @@ class BuggyVariable
 
 
     /**
-     * @param $count
-     * @param $strength
+     * Create a new swarm of bugs
      */
-    public function createSwarm($count, $strength)
+    public function createSwarm()
     {
-        StatusHelper::getService()->createSwarm($count, $strength);
+        StatusHelper::getService()->createSwarm();
     }
 
     /**
      * @param $swarmId
+     * @return array|ActiveRecord|null
      */
     public function getSwarm($swarmId)
     {
@@ -67,13 +67,11 @@ class BuggyVariable
 
     /**
      * @param $swarmId
-     * @param $swarmStrength
-     * @param $count
      * @return int
      */
-    public function spray($swarmId, $swarmStrength, $count): int
+    public function spray($swarmId): int
     {
-        return StatusHelper::getService()->spray($swarmId, $swarmStrength, $count);
+        return StatusHelper::getService()->spray($swarmId);
     }
 
 }

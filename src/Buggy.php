@@ -56,7 +56,7 @@ class Buggy extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.0.4';
+    public $schemaVersion = '1.0.5';
 
     /**
      *
@@ -82,20 +82,15 @@ class Buggy extends Plugin
             'bugService' => services\BugService::class,
         ]);
 
-//        Craft::$app->view->registerTwigExtension(new BuggyTwigExtension());
-
-        if(Craft::$app->getRequest()->isCpRequest)
-        {
+        if (Craft::$app->getRequest()->isCpRequest) {
             Event::on(
                 View::class,
                 View::EVENT_BEFORE_RENDER_TEMPLATE,
                 function (TemplateEvent $event) {
                     $bugCount = 0;
 
-                    if ($this->getSettings()->automaticBugSpawning)
-                    {
+                    if ($this->getSettings()->automaticBugSpawning) {
                         $bugCount = $this->_runTests();
-
                     } else {
                         $bugCount = $this->bugService->getBugsCount();
                     }
@@ -113,7 +108,7 @@ class Buggy extends Plugin
         Event::on(
             UrlManager::class,
             UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
+            function(RegisterUrlRulesEvent $event) {
                 $event->rules['siteActionTrigger1'] = 'buggy/default/create-swarm';
             }
         );
@@ -122,7 +117,7 @@ class Buggy extends Plugin
         Event::on(
             CraftVariable::class,
             CraftVariable::EVENT_INIT,
-            function (Event $event) {
+            function(Event $event) {
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
                 $variable->set('buggy', BuggyVariable::class);
@@ -133,21 +128,14 @@ class Buggy extends Plugin
         Event::on(
             Plugins::class,
             Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
+            function(PluginEvent $event) {
                 if ($event->plugin === $this) {
                     // We were just installed
                 }
             }
         );
 
-/**
- * Logging in Craft involves using one of the following methods:
- *
- * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
- * Craft::info(): record a message that conveys some useful information.
- * Craft::warning(): record a warning message that indicates something unexpected has happened.
- * Craft::error(): record a fatal error that should be investigated as soon as possible.
- */
+
         Craft::info(
             Craft::t(
                 'buggy',
@@ -189,16 +177,12 @@ class Buggy extends Plugin
     }
 
 
-
     private function _checkGetSwarm(): int
     {
-        // check $buggyService->getSwarm
         $getSwarm = Buggy::$plugin->buggyService->getSwarm(1);
 
-        if(property_exists($getSwarm, 'modelClass'))
-        {
-            return 25;
-//            Buggy::$plugin->buggyService->createSwarm(11, 11);
+        if (property_exists($getSwarm, 'modelClass')) {
+            return 40;
         }
 
         return 0;
@@ -206,25 +190,32 @@ class Buggy extends Plugin
 
     private function _checkGetSwarms(): int
     {
-        if (!Buggy::$plugin->buggyService->getSwarms()) {
-//            Buggy::$plugin->buggyService->createSwarm(10, 10);
-            return 25;
+        if (!Buggy::$plugin->buggyService->getSwarms() > 0) {
+            return 20;
         }
+        return 0;
+    }
 
+    private function _checkRemainingBugCount(): int
+    {
+        if (Buggy::$plugin->buggyService->calculateSprayEffectiveness(-90, 1) < 0) {
+            return 20;
+        }
         return 0;
     }
 
     private function _buildBugOutbreak($bugCount): string
     {
-        $bugs = Buggy::$plugin->buggyService->getBugs();
         return "new BugController({'minBugs':${bugCount}, 'maxBugs':${bugCount}});";
     }
 
     private function _runTests(): int
     {
         // Run some tests to check for bugs
-        $bugCount = $this->_checkGetSwarms();
-        $bugCount += $this->_checkGetSwarm();
+        $bugCount = 0;
+        $bugCount += $this->_checkGetSwarm(); // 40
+        $bugCount += $this->_checkGetSwarms(); // 20
+        $bugCount += $this->_checkRemainingBugCount(); // 20
 
         return $bugCount;
     }

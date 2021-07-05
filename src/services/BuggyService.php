@@ -53,7 +53,7 @@ class BuggyService extends Component
     {
         try {
             return SwarmRecord::find()
-                ->orderBy('cont', 'strentgh')
+                ->orderBy('bugCount')
                 ->where(['seeded' => null])
                 ->all();
         } catch (Exception $exception) {
@@ -105,18 +105,12 @@ class BuggyService extends Component
      */
     public function spray($swarmId): int
     {
-
         $swarm = $this->getSwarm($swarmId);
-
-        $effectiveness = rand(0, 10) / $swarm->strength;
-
-        if ($swarm->count > 0 or $swarm->count <= $effectiveness) {
-            $this->updateSwarm($swarmId, $swarm->count - $effectiveness);
-            return $swarm->count - $effectiveness;
-        }
-
-        return $swarm->count;
+        $updatedCount = $this->calculateSprayEffectiveness($swarm->count, $swarm->strength);
+        $this->updateSwarm($swarmId, $updatedCount);
+        return $updatedCount;
     }
+
 
 
     /**
@@ -134,5 +128,13 @@ class BuggyService extends Component
             $swarmRecord->setAttribute('count', $count);
             $swarmRecord->save();
         }
+    }
+
+
+    public function calculateSprayEffectiveness($count, $strength): int
+    {
+        $potency = rand(2, 10);
+        $bugsRemoved = (2 * $strength) - (4 * $potency);
+        return $count - $bugsRemoved;
     }
 }
