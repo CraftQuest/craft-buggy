@@ -82,8 +82,6 @@ class Buggy extends Plugin
             'bugService' => services\BugService::class,
         ]);
 
-//        Craft::$app->view->registerTwigExtension(new BuggyTwigExtension());
-
         if (Craft::$app->getRequest()->isCpRequest) {
             Event::on(
                 View::class,
@@ -181,7 +179,6 @@ class Buggy extends Plugin
 
     private function _checkGetSwarm(): int
     {
-        // check $buggyService->getSwarm
         $getSwarm = Buggy::$plugin->buggyService->getSwarm(1);
 
         if (property_exists($getSwarm, 'modelClass')) {
@@ -193,26 +190,18 @@ class Buggy extends Plugin
 
     private function _checkGetSwarms(): int
     {
-        if (!Buggy::$plugin->buggyService->getSwarms()) {
+        if (!Buggy::$plugin->buggyService->getSwarms() > 0) {
             return 20;
         }
-
         return 0;
     }
 
-    private function _checkSprayCount(): int
+    private function _checkRemainingBugCount(): int
     {
-        $swarm = Buggy::$plugin->buggyService->getSwarm(1);
-        if (!Buggy::$plugin->buggyService->calculateSprayEffectiveness($swarm) >= 0) {
+        if (Buggy::$plugin->buggyService->calculateSprayEffectiveness(-90, 1) < 0) {
             return 20;
         }
-
         return 0;
-    }
-
-    private function _checkRemainingBugCount()
-    {
-        // assert that the remaining bug count isn't a negative integer
     }
 
     private function _buildBugOutbreak($bugCount): string
@@ -223,10 +212,10 @@ class Buggy extends Plugin
     private function _runTests(): int
     {
         // Run some tests to check for bugs
-        $bugCount = $this->_checkGetSwarms();
-        $bugCount += $this->_checkGetSwarm();
-        $bugCount += $this->_checkSprayCount();
-//        $bugCount += $this->_checkRemainingBugCount();
+        $bugCount = 0;
+        $bugCount += $this->_checkGetSwarm(); // 40
+        $bugCount += $this->_checkGetSwarms(); // 20
+        $bugCount += $this->_checkRemainingBugCount(); // 20
 
         return $bugCount;
     }

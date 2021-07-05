@@ -134,15 +134,10 @@ class BuggyService extends Component
     }
 
 
-    public function calculateSprayEffectiveness($swarm): int
+    public function calculateSprayEffectiveness($count, $strength): int
     {
-        $potency = rand(1, 10);
-        try {
-            return $swarm->count - ($swarm->strength / $potency);
-        } catch(Exception $exception)
-        {
-            return 0;
-        }
-
+        $potency = rand(2, 10);
+        $bugsRemoved = (2 * $strength) - (4 * $potency);
+        return $count - $bugsRemoved;
     }
 }
