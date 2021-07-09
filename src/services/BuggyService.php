@@ -103,10 +103,15 @@ class BuggyService extends Component
      * @param $swarmId
      * @return int
      */
-    public function spray($swarmId): int
+    public function spray($swarmId)
     {
         $swarm = $this->getSwarm($swarmId);
-        $updatedCount = $this->calculateSprayEffectiveness($swarm->count, $swarm->strength);
+        try {
+            $updatedCount = $this->calculateSprayEffectiveness($swarm->count, $swarm->strength);
+
+        } catch (Exception $exception) {
+            return;
+        }
         $this->updateSwarm($swarmId, $updatedCount);
         return $updatedCount;
     }
