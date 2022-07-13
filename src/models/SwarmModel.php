@@ -30,32 +30,32 @@ class SwarmModel extends Model
     /**
      * @var int|null ID
      */
-    public $id;
+    public ?int $id;
 
     /**
      * @var int Count
      */
-    public $count = 0;
+    public int $count = 0;
 
     /**
      * @var int Strength
      */
-    public $strength = 0;
+    public int $strength = 0;
 
     /**
      * @var bool
      */
-    public $seeded = false;
+    public bool $seeded = false;
 
     /**
      * @var DateTime|null Date created
      */
-    public $dateCreated;
+    public ?DateTime $dateCreated;
 
     /**
      * @var DateTime|null Date updated
      */
-    public $dateUpdated;
+    public ?DateTime $dateUpdated;
 
     // Public Methods
     // =========================================================================

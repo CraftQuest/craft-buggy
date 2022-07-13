@@ -57,7 +57,7 @@ class BugService extends Component
     /**
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getSwarms()
+    public function getSwarms(): ?array
     {
         try {
             return SwarmRecord::find()
@@ -72,7 +72,7 @@ class BugService extends Component
     /**
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getBugs()
+    public function getBugs(): ?array
     {
         try {
             return SwarmRecord::find()
@@ -104,7 +104,7 @@ class BugService extends Component
      * @param $swarmId
      * @return array|\yii\db\ActiveRecord|null
      */
-    public function getSwarm($swarmId)
+    public function getSwarm($swarmId): array|\yii\db\ActiveRecord|null
     {
         return SwarmRecord::find()
             ->select('*')

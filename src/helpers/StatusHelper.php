@@ -28,7 +28,7 @@ class StatusHelper {
     /**
      * @return \craftquest\buggy\services\BuggyService|\craftquest\buggy\services\BugService
      */
-    public function getService()
+    public function getService(): \craftquest\buggy\services\BugService|\craftquest\buggy\services\BuggyService
     {
         if (Buggy::$plugin->getSettings()->automaticBugSpawning) {
             return Buggy::$plugin->buggyService;

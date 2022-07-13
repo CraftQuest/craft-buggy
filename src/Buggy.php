@@ -56,19 +56,19 @@ class Buggy extends Plugin
     /**
      * @var string
      */
-    public $schemaVersion = '1.0.6';
+    public string $schemaVersion = '1.0.6';
 
     /**
      *
      * @var bool
      */
-    public $hasCpSettings = true;
+    public bool $hasCpSettings = true;
 
     /**
      *
      * @var bool
      */
-    public $hasCpSection = false;
+    public bool $hasCpSection = false;
 
     // Public Methods
     // =========================================================================
@@ -155,7 +155,7 @@ class Buggy extends Plugin
      *
      * @return \craft\base\Model|null
      */
-    protected function createSettingsModel()
+    protected function createSettingsModel(): \craft\base\Model|Settings|null
     {
         return new Settings();
     }

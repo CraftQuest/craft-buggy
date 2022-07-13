@@ -39,7 +39,7 @@ class BuggyTwigExtension extends AbstractExtension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName(): string
     {
         return 'Buggy';
     }
@@ -48,7 +48,7 @@ class BuggyTwigExtension extends AbstractExtension
      *
      * @return array
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('screen', [$this, 'screen']),
@@ -61,7 +61,7 @@ class BuggyTwigExtension extends AbstractExtension
      * @return string
      */
 
-    public function screen($swarm)
+    public function screen($swarm): string
     {
         return;
     }

@@ -49,7 +49,7 @@ class BuggyService extends Component
     /**
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getSwarms()
+    public function getSwarms(): ?array
     {
         try {
             return SwarmRecord::find()
@@ -64,7 +64,7 @@ class BuggyService extends Component
     /**
      * @return array|\yii\db\ActiveRecord[]
      */
-    public function getBugs()
+    public function getBugs(): ?array
     {
         try {
             return SwarmRecord::find()
@@ -94,7 +94,7 @@ class BuggyService extends Component
      * @param $swarmId
      * @return array|\yii\db\ActiveRecord|null
      */
-    public function getSwarm($swarmId)
+    public function getSwarm($swarmId): craft\db\ActiveQuery|null
     {
         return SwarmRecord::find()->select('id', $swarmId);
     }
@@ -103,14 +103,14 @@ class BuggyService extends Component
      * @param $swarmId
      * @return int
      */
-    public function spray($swarmId)
+    public function spray($swarmId): int|null
     {
         $swarm = $this->getSwarm($swarmId);
         try {
             $updatedCount = $this->calculateSprayEffectiveness($swarm->count, $swarm->strength);
 
         } catch (Exception $exception) {
-            return;
+            return null;
         }
         $this->updateSwarm($swarmId, $updatedCount);
         return $updatedCount;
