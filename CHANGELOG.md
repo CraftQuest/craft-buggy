@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.0
+### Changed
+- added support for Craft 4
+
 ## 1.0.6
 ### Changed
 - updated spray method to catch exceptions

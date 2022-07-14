@@ -37,7 +37,7 @@ class Settings extends Model
     /**
      * @var bool
      */
-    public $automaticBugSpawning = true;
+    public bool $automaticBugSpawning = true;
 
     // Public Methods
     // =========================================================================
@@ -46,7 +46,7 @@ class Settings extends Model
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             ['automaticBugSpawning', 'boolean'],

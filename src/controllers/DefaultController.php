@@ -47,7 +47,7 @@ class DefaultController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['create-swarm', 'spray-swarm'];
+    protected array|int|bool $allowAnonymous = ['create-swarm', 'spray-swarm'];
 
     // Public Methods
     // =========================================================================
@@ -56,18 +56,18 @@ class DefaultController extends Controller
      *
      * @return mixed
      */
-    public function actionCreateSwarm()
+    public function actionCreateSwarm(): void
     {
-        StatusHelper::getService()->createSwarm();
+        (new StatusHelper)->getService()->createSwarm();
     }
 
     /**
      *
-     * @return mixed
+     * @return void
      */
-    public function actionSpraySwarm()
+    public function actionSpraySwarm(): void
     {
         $swarmId = Craft::$app->getRequest()->getParam('id');
-        StatusHelper::getService()->spray($swarmId);
+        (new StatusHelper)->getService()->spray($swarmId);
     }
 }

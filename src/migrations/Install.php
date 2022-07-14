@@ -32,7 +32,7 @@ class Install extends Migration
     /**
      * @var string The database driver to use
      */
-    public $driver;
+    public string $driver;
 
     // Public Methods
     // =========================================================================
@@ -87,7 +87,7 @@ class Install extends Migration
      *
      * @return bool
      */
-    protected function createTables()
+    protected function createTables(): bool
     {
         $tablesCreated = false;
 
@@ -117,7 +117,7 @@ class Install extends Migration
      *
      * @return void
      */
-    protected function createIndexes()
+    protected function createIndexes(): void
     {
     }
 
@@ -126,7 +126,7 @@ class Install extends Migration
      *
      * @return void
      */
-    protected function addForeignKeys()
+    protected function addForeignKeys(): void
     {
         $this->addForeignKey(
             $this->db->getForeignKeyName('{{%buggy_swarms}}', 'siteId'),
@@ -144,7 +144,7 @@ class Install extends Migration
      *
      * @return void
      */
-    protected function insertDefaultData()
+    protected function insertDefaultData(): void
     {
         $starterSwarm = [
             'count' => 100,
@@ -160,7 +160,7 @@ class Install extends Migration
      *
      * @return void
      */
-    protected function removeTables()
+    protected function removeTables(): void
     {
         $this->dropTableIfExists('{{%buggy_swarms}}');
     }
