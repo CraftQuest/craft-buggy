@@ -17,7 +17,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - clean up
 
 ## 1.0.4 - 2021-07-02
-
 ### Added
 - helper class for getting the correct service
 
