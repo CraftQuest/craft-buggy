@@ -1,4 +1,4 @@
-# Buggy plugin for Craft CMS 3.x
+# Buggy plugin for Craft CMS 4.x
 
 Buggy lets you add a fun bug infestation to your Craft Control Panel.
 
@@ -6,7 +6,7 @@ Buggy lets you add a fun bug infestation to your Craft Control Panel.
 
 ## Requirements
 
-This plugin requires Craft CMS 3.0.0 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Installation
 
@@ -52,12 +52,6 @@ Load that template in your web browser and you should see an interface for creat
 To get rid of the swarm, use the Spray Swarm button next to each swarm. 
 
 To get rid of the bugs on the screen you can just toggle off Manual Bug Spawning to remove the bugs completely.
-
-## Buggy Roadmap
-
-Some things to do, and ideas for potential features:
-
-* Release it
 
 ## Credits
 
