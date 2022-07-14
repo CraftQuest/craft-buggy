@@ -15,8 +15,8 @@
         "control panel"
     ],
     "support": {
-        "docs": "https://github.com/ryanirelan/buggy/blob/v2/README.md",
-        "issues": "https://github.com/ryanirelan/buggy/issues"
+        "docs": "https://github.com/CraftQuest/craft-buggy/blob/v2/README.md",
+        "issues": "https://github.com/CraftQuest/craft-buggy/issues"
     },
     "license": "MIT",
     "authors": [
@@ -43,8 +43,8 @@
         "handle": "buggy",
         "developer": "CraftQuest",
         "developerUrl": "https://craftquest.io",
-        "documentationUrl": "https://github.com/ryanirelan/buggy/blob/master/README.md",
-        "changelogUrl": "https://raw.githubusercontent.com/ryanirelan/buggy/master/CHANGELOG.md",
+        "documentationUrl": "https://github.com/CraftQuest/craft-buggy/blob/v2/README.md",
+        "changelogUrl": "https://raw.githubusercontent.com/CraftQuest/craft-buggy/v2/CHANGELOG.md",
         "components": {
             "buggyService": "craftquest\\buggy\\services\\BuggyService"
         },
