@@ -1,4 +1,4 @@
-# Buggy plugin for Craft CMS 4.x
+# Buggy plugin for Craft CMS 5.x
 
 Buggy lets you add a fun bug infestation to your Craft Control Panel.
 
@@ -6,7 +6,7 @@ Buggy lets you add a fun bug infestation to your Craft Control Panel.
 
 ## Requirements
 
-This plugin requires Craft CMS 4.0.0 or later.
+This plugin requires Craft CMS 5.0.0 or later.
 
 ## Installation
 
