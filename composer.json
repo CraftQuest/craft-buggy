@@ -1,55 +1,60 @@
 {
-    "name": "craftquest/buggy",
-    "description": "Put bugs in your control panel and then learn how to use Xdebug via CraftQuest.",
-    "type": "craft-plugin",
-    "version": "2.0.0",
-    "keywords": [
-        "craft",
-        "cms",
-        "craftcms",
-        "craft-plugin",
-        "buggy",
-        "xdebug",
-        "bugs",
-        "debugging",
-        "control panel"
-    ],
-    "support": {
-        "docs": "https://github.com/CraftQuest/craft-buggy/blob/v2/README.md",
-        "issues": "https://github.com/CraftQuest/craft-buggy/issues"
-    },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "CraftQuest",
-            "homepage": "https://craftquest.io"
-        }
-    ],
-    "require": {
-        "craftcms/cms": "^4.0.0"
-    },
-    "require-dev": {
-        "craftcms/cms": "^4.0.0",
-        "codeception/codeception": "^3.0",
-        "vlucas/phpdotenv": "^3.0",
-        "craftcms/ecs": "dev-main",
-        "craftcms/phpstan": "dev-main"
-    },
-    "autoload": {
-        "psr-4": {
-            "craftquest\\buggy\\": "src/"
-        }
-    },
-    "extra": {
-        "name": "Buggy",
-        "handle": "buggy",
-        "developer": "CraftQuest",
-        "developerUrl": "https://craftquest.io",
-        "documentationUrl": "https://github.com/CraftQuest/craft-buggy/blob/v2/README.md",
-        "changelogUrl": "https://raw.githubusercontent.com/CraftQuest/craft-buggy/v2/CHANGELOG.md",
-        "components": {
-            "buggyService": "craftquest\\buggy\\services\\BuggyService"
-        },
-        "class": "craftquest\\buggy\\Buggy"
+  "name": "craftquest/buggy",
+  "description": "Put bugs in your control panel and then learn how to use Xdebug via CraftQuest.",
+  "type": "craft-plugin",
+  "version": "2.0.0",
+  "keywords": [
+    "craft",
+    "cms",
+    "craftcms",
+    "craft-plugin",
+    "buggy",
+    "xdebug",
+    "bugs",
+    "debugging",
+    "control panel"
+  ],
+  "support": {
+    "docs": "https://github.com/CraftQuest/craft-buggy/blob/v2/README.md",
+    "issues": "https://github.com/CraftQuest/craft-buggy/issues"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "CraftQuest",
+      "homepage": "https://craftquest.io"
     }
+  ],
+  "require": {
+    "craftcms/cms": "^4.0.0"
+  },
+  "require-dev": {
+    "craftcms/cms": "^4.0.0",
+    "codeception/codeception": "^3.0",
+    "vlucas/phpdotenv": "^3.0",
+    "craftcms/ecs": "dev-main",
+    "craftcms/phpstan": "dev-main"
+  },
+  "autoload": {
+    "psr-4": {
+      "craftquest\\buggy\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "Buggy",
+    "handle": "buggy",
+    "developer": "CraftQuest",
+    "developerUrl": "https://craftquest.io",
+    "documentationUrl": "https://github.com/CraftQuest/craft-buggy/blob/v2/README.md",
+    "changelogUrl": "https://raw.githubusercontent.com/CraftQuest/craft-buggy/v2/CHANGELOG.md",
+    "components": {
+      "buggyService": "craftquest\\buggy\\services\\BuggyService"
+    },
+    "class": "craftquest\\buggy\\Buggy"
+  },
+  "scripts": {
+    "phpstan": "phpstan --ansi --memory-limit=2G",
+    "check-cs": "ecs check --ansi",
+    "fix-cs": "ecs check --fix --ansi"
+  }
 }
