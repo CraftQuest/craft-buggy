@@ -12,11 +12,9 @@ namespace craftquest\buggy\twigextensions;
 
 use craftquest\buggy\Buggy;
 
-use Craft;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
-use Twig\TwigFunction;
 
 /**
  * Twig can be extended in many ways; you can add extra tags, filters, tests, operators,

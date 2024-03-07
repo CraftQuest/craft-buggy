@@ -11,11 +11,10 @@
 namespace craftquest\buggy\variables;
 
 use craftquest\buggy\Buggy;
+use craftquest\buggy\helpers\StatusHelper;
 use craftquest\buggy\models\Settings;
 use craftquest\buggy\services\BuggyService;
-use craftquest\buggy\helpers\StatusHelper;
 
-use Craft;
 use yii\db\ActiveRecord;
 
 /**
@@ -44,7 +43,7 @@ class BuggyVariable
 
     public function swarms(): array|null
     {
-        return (new StatusHelper)->getService()->getSwarms();
+        return (new StatusHelper())->getService()->getSwarms();
     }
 
 
@@ -53,7 +52,7 @@ class BuggyVariable
      */
     public function createSwarm(): void
     {
-        (new StatusHelper)->getService()->createSwarm();
+        (new StatusHelper())->getService()->createSwarm();
     }
 
     /**
@@ -62,7 +61,7 @@ class BuggyVariable
      */
     public function getSwarm($swarmId): array|ActiveRecord|null
     {
-        return (new StatusHelper)->getService()->getSwarm($swarmId);
+        return (new StatusHelper())->getService()->getSwarm($swarmId);
     }
 
     /**
@@ -71,7 +70,6 @@ class BuggyVariable
      */
     public function spray($swarmId): int
     {
-        return (new StatusHelper)->getService()->spray($swarmId);
+        return (new StatusHelper())->getService()->spray($swarmId);
     }
-
 }

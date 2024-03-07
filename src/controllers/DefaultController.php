@@ -10,10 +10,10 @@
 
 namespace craftquest\buggy\controllers;
 
-use craftquest\buggy\Buggy;
-
 use Craft;
+
 use craft\web\Controller;
+use craftquest\buggy\Buggy;
 use craftquest\buggy\helpers\StatusHelper;
 
 /**
@@ -38,7 +38,6 @@ use craftquest\buggy\helpers\StatusHelper;
  */
 class DefaultController extends Controller
 {
-
     // Protected Properties
     // =========================================================================
 
@@ -58,7 +57,7 @@ class DefaultController extends Controller
      */
     public function actionCreateSwarm(): void
     {
-        (new StatusHelper)->getService()->createSwarm();
+        (new StatusHelper())->getService()->createSwarm();
     }
 
     /**
@@ -68,6 +67,6 @@ class DefaultController extends Controller
     public function actionSpraySwarm(): void
     {
         $swarmId = Craft::$app->getRequest()->getParam('id');
-        (new StatusHelper)->getService()->spray($swarmId);
+        (new StatusHelper())->getService()->spray($swarmId);
     }
 }

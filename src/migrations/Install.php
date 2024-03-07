@@ -10,11 +10,10 @@
 
 namespace craftquest\buggy\migrations;
 
-use craftquest\buggy\Buggy;
-
 use Craft;
-use craft\config\DbConfig;
+
 use craft\db\Migration;
+use craftquest\buggy\Buggy;
 use craftquest\buggy\records\SwarmRecord;
 
 /**
@@ -104,7 +103,7 @@ class Install extends Migration
                     'count' => $this->integer(),
                     'strength' => $this->integer(),
                     'seeded' => $this->boolean(),
-                    'siteId' => $this->integer()->null()
+                    'siteId' => $this->integer()->null(),
                 ]
             );
         }
@@ -152,7 +151,7 @@ class Install extends Migration
             'seeded' => true,
         ];
 
-            $this->insert(SwarmRecord::tableName(), $starterSwarm);
+        $this->insert(SwarmRecord::tableName(), $starterSwarm);
     }
 
     /**

@@ -11,15 +11,11 @@
 
 namespace craftquest\buggy\services;
 
-use craftquest\buggy\Buggy;
-
-use Craft;
 use craft\base\Component;
-use craftquest\buggy\models\SwarmModel;
-use craftquest\buggy\records\SwarmRecord;
-use yii\base\BaseObject;
-use yii\base\Exception;
 
+use craftquest\buggy\Buggy;
+use craftquest\buggy\records\SwarmRecord;
+use yii\base\Exception;
 
 /**
  * BugService Service
@@ -34,7 +30,6 @@ use yii\base\Exception;
  */
 class BugService extends Component
 {
-
     // Public Methods
     // =========================================================================
 
@@ -45,10 +40,9 @@ class BugService extends Component
 
     public function createSwarm(): void
     {
-
         $count = rand(1,100);
         $strength = rand(1,50);
-        $swarmRecord = new SwarmRecord;
+        $swarmRecord = new SwarmRecord();
         $swarmRecord->setAttribute('count', $count);
         $swarmRecord->setAttribute('strength', $strength);
         $swarmRecord->save();
@@ -118,7 +112,6 @@ class BugService extends Component
      */
     public function spray($swarmId): int
     {
-
         $swarm = $this->getSwarm($swarmId);
 
         $updatedCount = $this->calculateSprayEffectiveness($swarm);
@@ -148,5 +141,4 @@ class BugService extends Component
         $potency = rand(1, 10);
         return max($swarm->count - ($swarm->strength / $potency), 0);
     }
-
 }

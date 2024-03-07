@@ -10,7 +10,6 @@
 
 namespace craftquest\buggy\assetbundles\indexcpsection;
 
-use Craft;
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 

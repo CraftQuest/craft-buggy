@@ -12,7 +12,6 @@ namespace craftquest\buggy\helpers;
 
 use craftquest\buggy\Buggy;
 
-
 /**
  * Class StatusHelper
  *
@@ -21,10 +20,10 @@ use craftquest\buggy\Buggy;
  * @author    Ryan Irelan
  * @package   Buggy
  * @since     1.0.4
- * 
+ *
  */
-class StatusHelper {
-
+class StatusHelper
+{
     /**
      * @return \craftquest\buggy\services\BuggyService|\craftquest\buggy\services\BugService
      */
@@ -36,5 +35,4 @@ class StatusHelper {
 
         return Buggy::$plugin->bugService;
     }
-
 }

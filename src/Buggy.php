@@ -10,22 +10,20 @@
 
 namespace craftquest\buggy;
 
+use Craft;
+use craft\base\Plugin;
+use craft\events\PluginEvent;
+use craft\events\RegisterUrlRulesEvent;
+use craft\events\TemplateEvent;
+use craft\services\Plugins;
+use craft\web\twig\variables\CraftVariable;
+use craft\web\UrlManager;
+use craft\web\View;
 use craftquest\buggy\assetbundles\buggy\BuggyAsset;
+use craftquest\buggy\models\Settings;
 use craftquest\buggy\services\BuggyService;
 use craftquest\buggy\services\BugService;
 use craftquest\buggy\variables\BuggyVariable;
-use craftquest\buggy\twigextensions\BuggyTwigExtension;
-use craftquest\buggy\models\Settings;
-use Craft;
-use craft\base\Plugin;
-use craft\services\Plugins;
-use craft\events\PluginEvent;
-use craft\web\UrlManager;
-use craft\web\twig\variables\CraftVariable;
-use craft\events\RegisterUrlRulesEvent;
-use craft\events\TemplateEvent;
-use craft\web\View;
-use yii\base\BaseObject;
 use yii\base\Event;
 
 /**
@@ -86,7 +84,7 @@ class Buggy extends Plugin
             Event::on(
                 View::class,
                 View::EVENT_BEFORE_RENDER_TEMPLATE,
-                function (TemplateEvent $event) {
+                function(TemplateEvent $event) {
                     $bugCount = 0;
 
                     if ($this->getSettings()->automaticBugSpawning) {
@@ -171,7 +169,7 @@ class Buggy extends Plugin
         return Craft::$app->view->renderTemplate(
             'buggy/settings',
             [
-                'settings' => $this->getSettings()
+                'settings' => $this->getSettings(),
             ]
         );
     }
@@ -219,6 +217,4 @@ class Buggy extends Plugin
 
         return $bugCount;
     }
-
-
 }

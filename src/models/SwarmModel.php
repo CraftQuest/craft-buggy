@@ -10,10 +10,9 @@
 
 namespace craftquest\buggy\models;
 
-use craftquest\buggy\Buggy;
-
-use Craft;
 use craft\base\Model;
+
+use craftquest\buggy\Buggy;
 
 /**
  * Buggy Swarm Model

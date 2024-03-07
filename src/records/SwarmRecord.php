@@ -2,7 +2,6 @@
 
 namespace craftquest\buggy\records;
 
-use Craft;
 use craft\db\ActiveRecord;
 use craftquest\buggy\Buggy;
 
