@@ -29,13 +29,15 @@
         "craftcms/cms": "^4.0.0"
     },
     "require-dev": {
-      "craftcms/cms": "^4.0.0",
-      "codeception/codeception": "^3.0",
-      "vlucas/phpdotenv": "^3.0"
+        "craftcms/cms": "^4.0.0",
+        "codeception/codeception": "^3.0",
+        "vlucas/phpdotenv": "^3.0",
+        "craftcms/ecs": "dev-main",
+        "craftcms/phpstan": "dev-main"
     },
     "autoload": {
         "psr-4": {
-          "craftquest\\buggy\\": "src/"
+            "craftquest\\buggy\\": "src/"
         }
     },
     "extra": {
