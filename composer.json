@@ -53,5 +53,15 @@
     "phpstan": "phpstan --ansi --memory-limit=2G",
     "check-cs": "ecs check --ansi",
     "fix-cs": "ecs check --fix --ansi"
+  },
+  "config": {
+    "sort-packages": true,
+    "platform": {
+      "php": "8.0.2"
+    },
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
   }
 }
