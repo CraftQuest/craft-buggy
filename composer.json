@@ -26,10 +26,10 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^6.0.0"
+        "craftcms/cms": "^6.x-dev"
     },
     "require-dev": {
-      "craftcms/cms": "^6.0.0",
+      "craftcms/cms": "^6.x-dev",
       "codeception/codeception": "^3.0",
       "vlucas/phpdotenv": "^3.0"
     },
